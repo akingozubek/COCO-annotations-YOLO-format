@@ -9,7 +9,7 @@ file system:
 ```Shell
 ├──MAIN
     ├──Images
-        ├──images
+        images
     ├──Annotations
         annotations
     ├──Labels
@@ -19,10 +19,10 @@ file system:
 
 
 Commands
-```Shell
+```
 -t or --type-> you must use this command for train or valid dataset.
 -c or --classes->you must use this command for select specify classes.
--d or --download->you can use download annotations.
+-d or --download->you can use this command for download annotations.
 ```
 
 
