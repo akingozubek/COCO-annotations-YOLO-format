@@ -70,6 +70,4 @@ def write_labels(classes, data):
 
                     f.write(
                         f'{class_id} {" ".join([str(a) for a in annot])}\n')
-
-    with open("Labels/classes.txt", "w") as f:
-        f.write("\n".join(classes))
+                        
