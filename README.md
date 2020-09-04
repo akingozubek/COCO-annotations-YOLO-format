@@ -6,7 +6,7 @@ if you have annotations,it must be Annotations directory.
 if you have images,it must be Images directory.
 
 file system:
-```Shell
+```
 ├──MAIN
     ├──Images
         images
@@ -32,11 +32,11 @@ Commands Using:
 it is optional.
 if you not need download annotations, you maybe not use this command.
 
-```Shell
+```
 -d yes
 ```
 or
-```Shell
+```
 --download yes
 ```
 
@@ -52,21 +52,21 @@ I use 2017 annotations in code, if you want use another annotations you must be 
 
 -t/--type command select use train dataset or valid dataset.
 
-```Shell
+```
 -t train or -t valid
 ```
 or
-```Shell
+```
 --type train or --type valid
 ```
 
 
 -c/--classes your classes files path.
-```Shell
+```
 -c classes.txt
 ```
 or
-```Shell
+```
 --classes classes.txt
 ```
 
