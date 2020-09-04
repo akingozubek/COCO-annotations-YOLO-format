@@ -133,3 +133,4 @@ dmypy.json
 /Images
 /Labels
 /Annotations
+*.txt

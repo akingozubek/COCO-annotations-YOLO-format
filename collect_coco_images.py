@@ -1,6 +1,7 @@
 import os
-import requests
 from zipfile import ZipFile
+
+import requests
 from pycocotools.coco import COCO
 
 
@@ -25,6 +26,7 @@ def download_annotation():
 
 
 def collect_images(coco, categories):
+
     for category in categories:
         category_ids = coco.getCatIds(catNms=[category])
         if not category_ids:

@@ -1,10 +1,8 @@
 import argparse
-from zipfile import ZipFile
 import os
 
 import collect_coco_images
 import convert_yolo
-
 
 ap = argparse.ArgumentParser()
 ap.add_argument("-d", "--download", type=str, default=False,
@@ -13,8 +11,8 @@ ap.add_argument("-d", "--download", type=str, default=False,
 ap.add_argument("-t", "--type", required=True,
                 help="select for using image type for validation, train. use 'valid' or 'train' arguments.")
 
-ap.add_argument("-c", "--category", required=True, nargs="+",
-                help="select for using image categories. For Example: person or car dog cat")
+ap.add_argument("-c", "--classes", required=True,
+                help="select for using image categories files. Use a class file path.")
 
 args = vars(ap.parse_args())
 
@@ -23,11 +21,15 @@ def run():
     if args["download"] == "yes":
         collect_coco_images.download_annotation()
 
+    with open(args["classes"],"r") as f:
+        categories=f.read().splitlines()
+    
     annotation_file = collect_coco_images.annotations_type(
-        args["type"], args["category"])
+        args["type"], categories)
+        
     data = convert_yolo.annotation_data(annotation_file)
 
-    convert_yolo.write_labels(args["category"], data)
+    convert_yolo.write_labels(categories, data)
 
 
 if __name__ == "__main__":
