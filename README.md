@@ -1,0 +1,1 @@
+# COCO-annotations-YOLO-format
