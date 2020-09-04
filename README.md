@@ -22,14 +22,15 @@ Commands
 ```
 -t or --type-> you must use this command for train or valid dataset.
 -c or --classes->you must use this command for select specify classes.
--d or --download->you can use this command for download annotations.
+-d or --download->you can use download annotations.
 ```
 
 
 Commands Using: 
 
--d/--download command use like it download annotations, 
-it is optional if you not need download annotations, you can not use this command.
+-d/--download command use for download annotations, 
+it is optional.
+if you not need download annotations, you maybe not use this command.
 
 ```Shell
 -d yes
@@ -83,7 +84,7 @@ python main.py -t valid -c Labels/classes.txt
 ```
 
 
-You can control any annotation tools.
+You can control with any annotation tools.
 
 I controlled with labelImg.
 https://github.com/tzutalin/labelImg
@@ -94,6 +95,6 @@ https://github.com/AlexeyAB/Yolo_mark
 or another annotation tools.
 
 
-you have labels and images when process is done, you can train YOLO models with these files.
+ process is done, you can train YOLO models with images and labels files.
 
-if any suggestion or question you can create issues.
+if you have any suggestion or question you can create issues.
