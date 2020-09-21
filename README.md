@@ -66,7 +66,7 @@ Also you can use
 
 or another annotation tools.
 
-`code work with **instances** annotations.`
+code work with **instances** annotations.
 
 I use **2017** annotations in code, if you want use another annotations you must be change **annot variable** in **collect_coco_images.py**
 
