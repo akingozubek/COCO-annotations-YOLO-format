@@ -10,7 +10,7 @@ when processing is done, you can find the txt files in the Labels folder.
 
 file system:
 
-````├──MAIN
+```├──MAIN
     ├──Images
         images
     ├──Annotations
@@ -71,4 +71,3 @@ process is done, you can train YOLO models with images and labels files.
 
 if you have any suggestion or question you can ask me.
 I can answer your question as far as I know.
-````
