@@ -27,6 +27,7 @@ def collect_images(coco: object, categories: list) -> None:
             except FileExistsError:
                 print("Images Directory Exists.")
 
+            print("Downloading Start")
             for img in images:
                 img_name = img['file_name']
 
@@ -35,7 +36,7 @@ def collect_images(coco: object, categories: list) -> None:
                     img_data = requests.get(img['coco_url']).content
 
                     with open(f'Images/{img_name}', 'wb') as f:
-                        print(f"{img_name} Downloaded")
+                        #print(f"{img_name} Downloaded")
                         f.write(img_data)
 
                 else:
@@ -50,22 +51,26 @@ def collect_images(coco: object, categories: list) -> None:
 
 
 def annotations_type(annot_type: str, categories: list) -> str:
+    try:
+        if annot_type == "train":
 
-    if annot_type == "train":
+            annot = "Annotations/instances_train2017.json"
+            coco = COCO(annot)
+            collect_images(coco, categories)
 
-        annot = "Annotations/instances_train2017.json"
-        coco = COCO(annot)
-        collect_images(coco, categories)
+            return annot
 
-        return annot
+        elif annot_type == "valid":
 
-    elif annot_type == "valid":
+            annot = "Annotations/instances_val2017.json"
+            coco = COCO(annot)
+            collect_images(coco, categories)
 
-        annot = "Annotations/instances_val2017.json"
-        coco = COCO(annot)
-        collect_images(coco, categories)
+            return annot
 
-        return annot
+        else:
+            print("Invalid Value")
+            return None
 
-    else:
-        return None
+    except FileNotFoundError:
+        print("Annotation File Not Exists.")

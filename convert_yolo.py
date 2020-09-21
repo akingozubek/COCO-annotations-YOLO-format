@@ -35,22 +35,30 @@ def annotation_data(annot_file: str) -> dict:
 
 
 def write_labels(classes: list, data: dict) -> None:
-    # All your images list in images directory
-    images = os.listdir("Images")
+    try:
+        # All your images list in images directory
+        images = os.listdir("Images")
 
-    # Required categories
-    categories = [cat for cat in data["categories"]
-                  if cat["name"] in classes]
+        # Required categories
+        categories = [cat for cat in data["categories"]
+                      if cat["name"] in classes]
 
-    # Categories name
-    classes = [class_["name"] for class_ in categories]
+        # Categories name
+        classes = [class_["name"] for class_ in categories]
 
-    # All COCO dataset images
-    coco_images = [coco_img for coco_img in data["images"]]
+        # All COCO dataset images
+        coco_images = [coco_img for coco_img in data["images"]]
 
-    # Images matching the COCO dataset images
-    matching_images = [
-        match for match in coco_images if match["file_name"] in images]
+        # Images matching the COCO dataset images
+        matching_images = [
+            match for match in coco_images if match["file_name"] in images]
+
+        if not len(matching_images):
+            print("Not found COCO images.")
+            quit()
+    except FileNotFoundError:
+        print("Not found Images Directory.")
+        quit()
 
     # Labels Path
     try:
@@ -58,6 +66,7 @@ def write_labels(classes: list, data: dict) -> None:
     except FileExistsError:
         print("Labels Directory Exists.")
 
+    print("Started Annotations Process.")
     for img in matching_images:
 
         # Image features

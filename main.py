@@ -31,15 +31,14 @@ def run() -> None:
         annotation_file = collect_coco_images.annotations_type(
             args["type"], categories)
 
-        data = convert_yolo.annotation_data(annotation_file)
+        if annotation_file:
 
-        convert_yolo.write_labels(categories, data)
+            data = convert_yolo.annotation_data(annotation_file)
+
+            convert_yolo.write_labels(categories, data)
 
     except FileNotFoundError:
-        print("File Not Exists.")
-
-    except TypeError:
-        print("Invalid Value.")
+        print("Classes File Not Exists.")
 
 
 if __name__ == "__main__":
