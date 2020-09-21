@@ -5,45 +5,27 @@ import requests
 from pycocotools.coco import COCO
 
 
-def download_annotation():
-    print("Annotations Downloaded Start")
-
-    req = requests.get(
-        "http://images.cocodataset.org/annotations/annotations_trainval2017.zip")
-
-    try:
-        os.mkdir("Annotations")
-    except:
-        pass
-    with open("Annotations/annotations.zip", "wb") as f:
-        f.write(req.content)
-
-    print("Download Complete")
-
-    with ZipFile("Annotations/annotations.zip", "r") as f:
-        f.extractall()
-    print("Extract Zip")
-
-
-def collect_images(coco, categories):
+def collect_images(coco: object, categories: list) -> None:
 
     for category in categories:
         category_ids = coco.getCatIds(catNms=[category])
         if not category_ids:
             print(f'{category} is not in COCO dataset categories.')
-            continue
+            break
+
         image_ids = coco.getImgIds(catIds=category_ids)
         images = coco.loadImgs(image_ids)
 
         answer = input(
-            f"Your selected category {category} has {len(images)} images Do you want download those images?(y/n)")
+            f"Your selected category {category} has {len(images)} images."
+            f"Do you want download those images?(y/n)")
 
         if answer.lower() == "y":
 
             try:
                 os.mkdir("Images")
             except FileExistsError:
-                pass
+                print("Images Directory Exists.")
 
             for img in images:
                 img_name = img['file_name']
@@ -63,10 +45,11 @@ def collect_images(coco, categories):
             continue
 
         else:
+            print("Please select y/n")
             break
 
 
-def annotations_type(annot_type, categories):
+def annotations_type(annot_type: str, categories: list) -> str:
 
     if annot_type == "train":
 
@@ -83,3 +66,6 @@ def annotations_type(annot_type, categories):
         collect_images(coco, categories)
 
         return annot
+
+    else:
+        return None

@@ -1,9 +1,11 @@
+# Import packages
 import json
 import os
 
 
 # Convert bbox to yolo type annotations.
-def convertYOLO(size, box):
+def convertYOLO(size: tuple, box: list) -> tuple:
+    # Image height, width
     dw = 1./size[0]
     dh = 1./size[1]
 
@@ -23,24 +25,42 @@ def convertYOLO(size, box):
 # Coco annotations path
 # https://cocodataset.org/#download
 
-def annotation_data(annot_file):
+# Load json file
+def annotation_data(annot_file: str) -> dict:
+
     with open(annot_file, 'r') as f:
         data = json.load(f)
+
     return data
 
 
-def write_labels(classes, data):
-    # all your images list in images directory
+def write_labels(classes: list, data: dict) -> None:
+    # All your images list in images directory
     images = os.listdir("Images")
-    categories = [i for i in data["categories"] if i["name"] in classes]
 
-    classes = [i["name"] for i in categories]
+    # Required categories
+    categories = [cat for cat in data["categories"]
+                  if cat["name"] in classes]
 
-    coco_images = [i for i in data["images"]]
+    # Categories name
+    classes = [class_["name"] for class_ in categories]
 
-    matching_images = [i for i in coco_images if i["file_name"] in images]
+    # All COCO dataset images
+    coco_images = [coco_img for coco_img in data["images"]]
+
+    # Images matching the COCO dataset images
+    matching_images = [
+        match for match in coco_images if match["file_name"] in images]
+
+    # Labels Path
+    try:
+        os.mkdir("Labels")
+    except FileExistsError:
+        print("Labels Directory Exists.")
 
     for img in matching_images:
+
+        # Image features
         image_id = img['id']
         file_name = img['file_name']
         width = img['width']
@@ -49,13 +69,12 @@ def write_labels(classes, data):
         annoted_obj = filter(
             lambda x: x['image_id'] == image_id, data['annotations'])
 
-        # labels Path
-        try:
-            os.mkdir("Labels")
-        except FileExistsError:
-            pass
+        # Drop .jpg
+        file_name = file_name.split(".")[0]
 
-        with open(f'Labels/{file_name[:-4]}.txt', 'w') as f:
+        # Create txt file and write annotations in it.
+        with open(f'Labels/{file_name}.txt', 'w') as f:
+
             for img2 in annoted_obj:
                 category_id = img2['category_id']
 
@@ -66,8 +85,9 @@ def write_labels(classes, data):
                     name = item["name"]
                     class_id = classes.index(name)
                     bbox = img2['bbox']
+
                     annot = convertYOLO((width, height), bbox)
 
                     f.write(
-                        f'{class_id} {" ".join([str(a) for a in annot])}\n')
-                        
+                        f'{class_id} '
+                        f'{" ".join([str(a) for a in annot])}\n')
