@@ -36,7 +36,7 @@ def collect_images(coco: object, categories: list) -> None:
                     img_data = requests.get(img['coco_url']).content
 
                     with open(f'Images/{img_name}', 'wb') as f:
-                        #print(f"{img_name} Downloaded")
+                        print(f"{img_name} Downloaded")
                         f.write(img_data)
 
                 else:
