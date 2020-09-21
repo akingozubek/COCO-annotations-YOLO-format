@@ -6,8 +6,6 @@ You must have annotations files especially instances annotations and it must be 
 
 If you have images, it must be in Images directory.
 
-When finished processing, txt files in Labels directory.
-
 When processing is done, you can find the txt files in the Labels folder.
 
 **file system:**
@@ -29,6 +27,7 @@ When processing is done, you can find the txt files in the Labels folder.
 -c or --classes -> you must use this command for select specify classes. it is your classes file.
 
 _Using Commands:_
+
 `-t train` or `-t valid`
 
 or
@@ -42,6 +41,7 @@ or
 `--classes classes.txt`
 
 **_FOR EXAMPLE USES:_**
+
 use train annotations and images, collect images and annotations for inside classes.txt
 
 ```Shell
@@ -56,9 +56,9 @@ python main.py -t valid -c Labels/classes.names
 
 **_NOTES_**
 
-You can control with any annotation tools.
+You can control results with any annotation tools.
 
-I controlled with labelImg.
+I controlled with **labelImg.**
 <https://github.com/tzutalin/labelImg>
 
 Also you can use
@@ -66,9 +66,9 @@ Also you can use
 
 or another annotation tools.
 
-code work with **instances** annotations.
+`code work with **instances** annotations.`
 
-I use 2017 annotations in code, if you want use another annotations you must be change annot variable in collect_coco_images.py
+I use **2017** annotations in code, if you want use another annotations you must be change **annot variable** in **collect_coco_images.py**
 
 process is done, you can train YOLO models with images and labels files.
 
