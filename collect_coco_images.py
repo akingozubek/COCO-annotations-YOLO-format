@@ -1,5 +1,4 @@
 import os
-from zipfile import ZipFile
 
 import requests
 from pycocotools.coco import COCO
@@ -25,7 +24,7 @@ def collect_images(coco: object, categories: list) -> None:
             try:
                 os.mkdir("Images")
             except FileExistsError:
-                print("Images Directory Exists.")
+                pass
 
             print("Downloading Start")
             for img in images:
@@ -69,7 +68,7 @@ def annotations_type(annot_type: str, categories: list) -> str:
             return annot
 
         else:
-            print("Invalid Value")
+            print("Invalid Annotation Type")
             return None
 
     except FileNotFoundError:

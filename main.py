@@ -38,7 +38,7 @@ def run() -> None:
             convert_yolo.write_labels(categories, data)
 
     except FileNotFoundError:
-        print("Classes File Not Exists.")
+        print("Classes File Not Found")
 
 
 if __name__ == "__main__":

@@ -54,7 +54,7 @@ def write_labels(classes: list, data: dict) -> None:
             match for match in coco_images if match["file_name"] in images]
 
         if not len(matching_images):
-            print("Not found COCO images.")
+            print("Not found any COCO images.")
             quit()
     except FileNotFoundError:
         print("Not found Images Directory.")
@@ -64,7 +64,7 @@ def write_labels(classes: list, data: dict) -> None:
     try:
         os.mkdir("Labels")
     except FileExistsError:
-        print("Labels Directory Exists.")
+        pass
 
     print("Started Annotations Process.")
     for img in matching_images:
