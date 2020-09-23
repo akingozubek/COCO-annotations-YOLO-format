@@ -4,7 +4,7 @@ Collect COCO datasets for selected classes and convert Json annotations to YOLO 
 
 You must have annotations files especially instances annotations and it must be in Annotations directory.
 
-You can download annotations this links:
+You can download annotations this link:
 <https://cocodataset.org/#download>
 
 If you have images, it must be in Images directory.
