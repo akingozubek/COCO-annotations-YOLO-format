@@ -78,3 +78,6 @@ process is done, you can train YOLO models with images and labels files.
 if you have any suggestion or question you can ask me.
 
 I can answer your question as far as I know.
+
+# License
+COCO-annotations-YOLO-format is MIT-licensed.
